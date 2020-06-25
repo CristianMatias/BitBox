@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-jun-2020 18:32:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.POJOS.Pricereduction" table="pricereduction" schema="public" optimistic-lock="version">
+        <id name="idReduction" type="int">
+            <column name="id_reduction" />
+            <generator class="assigned" />
+        </id>
+        <property name="reducedprice" type="java.lang.Double">
+            <column name="reducedprice" precision="17" scale="17" />
+        </property>
+        <property name="startdate" type="date">
+            <column name="startdate" length="13" />
+        </property>
+        <property name="enddate" type="date">
+            <column name="enddate" length="13" />
+        </property>
+        <set name="items" table="item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reduction_id" />
+            </key>
+            <one-to-many class="Model.POJOS.Item" />
+        </set>
+    </class>
+</hibernate-mapping>

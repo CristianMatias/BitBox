@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-jun-2020 18:32:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="Model.POJOS.Item" optimistic-lock="version" schema="public" table="item">
+    <id name="code" type="int">
+      <column name="code"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="Model.POJOS.Pricereduction" fetch="select" name="pricereduction">
+      <column name="reduction_id"/>
+    </many-to-one>
+    <many-to-one class="Model.Supplier.Supplier" fetch="select" name="supplier">
+      <column name="supplier_id"/>
+    </many-to-one>
+    <many-to-one class="Model.User.Userlogin" fetch="select" name="userlogin">
+      <column name="creator"/>
+    </many-to-one>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="price" type="java.lang.Double">
+      <column name="price" precision="17" scale="17"/>
+    </property>
+    <property name="stateitem" type="string">
+      <column name="stateitem"/>
+    </property>
+    <property name="creationdate" type="date">
+      <column length="13" name="creationdate"/>
+    </property>
+  </class>
+</hibernate-mapping>
