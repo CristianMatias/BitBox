@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Cristian
  */
-public class Conection {
+public class Conexion {
 
     private static final SessionFactory sessionFactory;
     

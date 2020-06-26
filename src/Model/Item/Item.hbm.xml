@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 25-jun-2020 18:32:38 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="Model.POJOS.Item" optimistic-lock="version" schema="public" table="item">
+  <class name="Model.Item.Item" optimistic-lock="version" schema="public" table="item">
     <id name="code" type="int">
       <column name="code"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Model.POJOS.Pricereduction" fetch="select" name="pricereduction">
+    <many-to-one class="Model.PriceReduction.Pricereduction" fetch="select" name="pricereduction">
       <column name="reduction_id"/>
     </many-to-one>
     <many-to-one class="Model.Supplier.Supplier" fetch="select" name="supplier">

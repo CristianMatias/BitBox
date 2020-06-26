@@ -97,6 +97,11 @@ public class Item  implements java.io.Serializable {
         this.creationdate = creationdate;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" + "code=" + code + ", pricereduction=" + pricereduction + ", supplier=" + supplier + ", userlogin=" + userlogin + ", description=" + description + ", price=" + price + ", stateitem=" + stateitem + ", creationdate=" + creationdate + '}';
+    }
+
 
 
 

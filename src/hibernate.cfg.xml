@@ -46,9 +46,9 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/bitbox</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">qwerty</property>
-    <mapping resource="Model/POJOS/Userlogin.hbm.xml"/>
-    <mapping resource="Model/POJOS/Supplier.hbm.xml"/>
-    <mapping resource="Model/PriceReduction/Pricereduction.hbm.xml"/>
-    <mapping resource="Model/Item/Item.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="Model/User/Userlogin.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="Model/Supplier/Supplier.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="Model/PriceReduction/Pricereduction.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="Model/Item/Item.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
