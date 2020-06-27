@@ -1,6 +1,7 @@
 package Control;
 
 import Model.Model;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,11 @@ public class ControlImpl implements Control{
     @Override
     public boolean logUser(String name, String password) {
         return model.logUser(name, password);
+    }
+
+    @Override
+    public List readItems() {
+        return model.readAll();
     }
     
     
