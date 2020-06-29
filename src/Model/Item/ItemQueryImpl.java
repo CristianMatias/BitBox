@@ -28,14 +28,16 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public void startTransaction() {
-        transaccion = getSession().getTransaction();
+        transaccion = session.beginTransaction();
     }
 
     @Override
     public void endTransaction() {
         try{
+            if(!transaccion.wasCommitted())
             transaccion.commit();
         }catch(HibernateException ex){
+            transaccion.rollback();
             handleException(ex);
         }finally{
             closeSession();
@@ -44,7 +46,6 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public void handleException(HibernateException ex) {
-        transaccion.rollback();
         JOptionPane.showConfirmDialog(null, null, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -66,7 +67,15 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public boolean update(Item object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            startTransaction();
+            getSession().update(object);
+            endTransaction();
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public void closeSession() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session.close();
     }
     
 }

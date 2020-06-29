@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package View;
 
 import Control.Control;
 import Model.Item.Item;
 import Model.PriceReduction.Pricereduction;
+import java.awt.HeadlessException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,13 +16,34 @@ import javax.swing.ImageIcon;
  */
 public class ItemFIle extends javax.swing.JFrame {
     private final Control control;
-    private final Item item;
+    private String userName = null;
+    private Item item = null;
     
-    public ItemFIle(Item item, Control control) {
+    public ItemFIle(Item item, Control control, String userName) {
         initComponents();
         this.item = item;
         this.control = control;
+        this.userName = userName;
         fillItemInformation();
+        closeInformationUnchangable();
+    }
+
+    public ItemFIle(Control control) throws HeadlessException {
+        this.control = control;
+        initComponents();
+        fillItemInformation();
+    }
+    
+    private void closeInformationUnchangable(){
+        codeField.setEditable(false);
+        dateField.setEditable(false);
+        if(userName == null){
+            nameField.setEditable(false);
+            offertField.setEditable(false);
+            saveButton.setEnabled(false);
+            removeButton.setEnabled(false);
+            discardButton.setEnabled(false);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -36,8 +55,8 @@ public class ItemFIle extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        discardButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
@@ -51,15 +70,22 @@ public class ItemFIle extends javax.swing.JFrame {
         offertField = new javax.swing.JTextField();
         offertInfo = new javax.swing.JLabel();
         creatorInfo = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         originalPrice = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        codeField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(700, 0));
 
-        jButton3.setText("Discard changes");
+        discardButton.setText("Discard changes");
+        discardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discardButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Remove Item");
+        removeButton.setText("Remove Item");
 
         jLabel1.setText("Description");
 
@@ -82,9 +108,16 @@ public class ItemFIle extends javax.swing.JFrame {
 
         creatorInfo.setText("Product added by");
 
-        jButton2.setText("Save changes");
+        saveButton.setText("Save changes");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         originalPrice.setText("jLabel3");
+
+        jLabel3.setText("Code");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,11 +127,11 @@ public class ItemFIle extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(saveButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(discardButton)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(creatorInfo))
                     .addGroup(layout.createSequentialGroup()
@@ -116,12 +149,14 @@ public class ItemFIle extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                             .addComponent(supplierField)
-                            .addComponent(dateField))
+                            .addComponent(dateField)
+                            .addComponent(codeField))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -136,11 +171,15 @@ public class ItemFIle extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(codeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
@@ -171,9 +210,9 @@ public class ItemFIle extends javax.swing.JFrame {
                                     .addComponent(originalPrice))
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2)
+                            .addComponent(removeButton)
+                            .addComponent(discardButton)
+                            .addComponent(saveButton)
                             .addComponent(creatorInfo))
                         .addContainerGap())))
         );
@@ -181,20 +220,57 @@ public class ItemFIle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void discardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardButtonActionPerformed
+        fillItemInformation();
+    }//GEN-LAST:event_discardButtonActionPerformed
+    
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        if(control.saveItem(updateInformation())) {
+            JOptionPane.showMessageDialog(null, "Changes applied succesfully");
+            this.dispose();
+            ViewImpl.prepareTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Couldn't apply changes");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private Item updateInformation(){
+        item.setDescription(nameField.getText());
+        item.setPrice(Double.parseDouble(offertField.getText()));
+        if(activeCheck.isSelected()) item.setStateitem("Active");
+        else item.setStateitem("Discontinued");
+        return item;
+    }
+    
+    private Item getInformation() throws ParseException{
+        Item newItem = new Item();
+        newItem.setCode(Integer.parseInt(codeField.getText()));
+        newItem.setDescription(nameField.getText());
+        newItem.setCreationdate(new SimpleDateFormat("yyyy-MM-dd").parse(dateField.getText()));
+        newItem.setPrice(Double.parseDouble(offertField.getText()));
+        if(activeCheck.isSelected()) newItem.setStateitem("Active");
+        else newItem.setStateitem("Discontinued");
+        newItem.setSupplier(control.getSupplier(supplierField.getText()));
+        newItem.setUserlogin(control.getUserlogin(userName));
+        return newItem;
+    }
+    
      private void fillItemInformation() {
+         codeField.setText(item.getCode()+"");
         nameField.setText(item.getDescription());
         dateField.setText(item.getCreationdate()+"");
         supplierField.setText(item.getSupplier().getName());
         if(getStateItem(item.getStateitem())) activeCheck.setSelected(true);
         else deactiveCheck.setSelected(false);
-        creatorInfo.setText(creatorInfo.getText()+" "+item.getUserlogin().getUsername());
+        creatorInfo.setText("Product added by "+item.getUserlogin().getUsername());
          prepareInformationPrices(item.getPrice(), item.getPricereduction());
     }
 
      private void prepareInformationPrices(double price, Pricereduction priceReduction){
          Date date = new Date(); 
         if(date.before(priceReduction.getEnddate()) && date.after(priceReduction.getStartdate())){
-            offertInfo.setText(offertInfo.getText()+" "+priceReduction.getEnddate().getMonth()+"/"
+            offertInfo.setText("Offert Avalible until "+priceReduction.getEnddate().getMonth()+"/"
                     +priceReduction.getEnddate().getDay());
             offertField.setText((price - priceReduction.getReducedprice())+"");
             originalPrice.setText("<html><body><span style='text-decoration: line-through;'>"+price+"</span></body></html>");
@@ -213,21 +289,23 @@ public class ItemFIle extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox activeCheck;
+    private javax.swing.JTextField codeField;
     private javax.swing.JLabel creatorInfo;
     private javax.swing.JTextField dateField;
     private javax.swing.JCheckBox deactiveCheck;
+    private javax.swing.JButton discardButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField offertField;
     private javax.swing.JLabel offertInfo;
     private javax.swing.JLabel originalPrice;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JTextField supplierField;
     // End of variables declaration//GEN-END:variables
 

@@ -12,35 +12,42 @@ import javax.swing.JOptionPane;
  * @author Cristian
  */
 public class ViewImpl extends javax.swing.JFrame implements View{
-    private final Control control;
+    private static Control control;
     private String userName = null;
-    private List<Item> itemList;
+    private static List<Item> itemList;
     
     /**
      * Creates new form ViewImpl
      * @param control
      */
     public ViewImpl(Control control) {
-        this.control = control;
+        ViewImpl.control = control;
         initComponents();
         prepareTable();
     }
     
     public ViewImpl(Control control,String userName){
         initComponents();
-        this.control = control;
+        ViewImpl.control = control;
         this.userName = userName;
         loginButton.setText(userName);
         prepareTable();
     }
     
-    
-    private void prepareTable(){
+    protected static void prepareTable(){
         itemList = control.readItems();
         prepareTableItems((DefaultTableModel) itemTable.getModel());
+        
     }
     
-    private void prepareTableItems(DefaultTableModel model){
+    private static void deleteRows(int rows, DefaultTableModel model){
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
+    
+    private static void prepareTableItems(DefaultTableModel model){
+        deleteRows(model.getRowCount(), model);
         itemList.forEach((item) -> {
             Object[] row = new Object[6];
             
@@ -195,7 +202,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     
         itemList.forEach((item) ->{
             if(code.equals(item.getDescription())) {
-                new ItemFIle(item, control).setVisible(true);
+                new ItemFIle(item, control, userName).setVisible(true);
             }
         });
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -203,14 +210,13 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     @Override
     public void start() {
         this.setVisible(true);
-        initComponents();
     }
     
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTable itemTable;
+    private static javax.swing.JTable itemTable;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

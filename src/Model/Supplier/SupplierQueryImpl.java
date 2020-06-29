@@ -1,4 +1,4 @@
-package Model.User;
+package Model.Supplier;
 
 import Model.Conexion;
 import java.io.Serializable;
@@ -9,27 +9,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author Cristian
- */
-public class UserQueryImpl implements UserQuery{
-    private Transaction transaccion;
+
+public class SupplierQueryImpl implements SupplierQuery {
+private Transaction transaccion;
     private Query query;
     private Session session = null;
-
-    @Override
-    public boolean checkUser(String name, String pass) {
-        try{
-            query = getSession().createQuery(HQL_CHECK_USER);
-            query.setString("name", name);
-            query.setString("pass", pass);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
-
+    
     @Override
     public Session getSession() {
         if(session == null || !session.isOpen()) 
@@ -61,27 +46,27 @@ public class UserQueryImpl implements UserQuery{
     }
 
     @Override
-    public List<Userlogin> readAll() {
+    public List<Supplier> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Userlogin readOne(Serializable id, Class<Userlogin> entityClass) {
+    public Supplier readOne(Serializable id, Class<Supplier> entityClass) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean insert(Userlogin object) {
+    public boolean insert(Supplier object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Userlogin object) {
+    public boolean update(Supplier object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean create(Userlogin object) {
+    public boolean create(Supplier object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -91,14 +76,10 @@ public class UserQueryImpl implements UserQuery{
     }
 
     @Override
-    public Userlogin getUserlogin(String name) {
-        query = getSession().createQuery("from Userlogin WHERE username = :name");
+    public Supplier getSupplier(String name) {
+        query = getSession().createQuery("from Supplier WHERE name = :name");
         query.setString("name", name);
-        return (Userlogin) query.setMaxResults(1).uniqueResult();
+        return (Supplier) query.setMaxResults(1).uniqueResult();
     }
-
-   
-    
-   
     
 }
