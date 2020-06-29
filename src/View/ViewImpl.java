@@ -24,6 +24,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         ViewImpl.control = control;
         initComponents();
         prepareTable();
+        createButton.setVisible(false);
     }
     
     public ViewImpl(Control control,String userName){
@@ -54,9 +55,9 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             row[0] = item.getCode();
             row[1] = item.getDescription();
             row[2] = preparePrices(item.getPrice(), item.getPricereduction());
-            row[3] = item.getUserlogin().getUsername();
-            row[4] = item.getCreationdate();
-            row[5] = item.getStateitem();
+            row[3] = item.getCreationdate();
+            row[4] = item.getStateitem();
+            row[5] = item.getUserlogin().getUsername();
             model.addRow(row);
         });
         itemTable.setModel(model);
@@ -64,8 +65,11 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     
     protected static double preparePrices(double price, Pricereduction priceReduction){
         Date date = new Date(); 
-        if(date.before(priceReduction.getEnddate()) && date.after(priceReduction.getStartdate()))
-            return price - priceReduction.getReducedprice();
+        if(priceReduction != null){
+            if(date.before(priceReduction.getEnddate()) && date.after(priceReduction.getStartdate()))
+                return price - priceReduction.getReducedprice();
+            else return price;
+        }
         else return price;
     }
     
@@ -84,10 +88,11 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         jScrollPane1 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        exitButton = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        showItem = new javax.swing.JMenuItem();
+        createButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,7 +130,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
         jTabbedPane1.addTab("Tabla de Precios", jScrollPane1);
 
-        jMenu1.setText("Archivo");
+        exitButton.setText("Archivo");
 
         jMenuItem1.setText("Exit");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,19 +138,27 @@ public class ViewImpl extends javax.swing.JFrame implements View{
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        exitButton.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(exitButton);
 
         jMenu3.setText("Item");
 
-        jMenuItem2.setText("Show Item");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        showItem.setText("Show Item");
+        showItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                showItemActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenu3.add(showItem);
+
+        createButton.setText("Create Item");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createButtonActionPerformed(evt);
+            }
+        });
+        jMenu3.add(createButton);
 
         jMenuBar1.add(jMenu3);
 
@@ -190,7 +203,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void showItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showItemActionPerformed
 
         String[] items = new String[itemList.size()];
         for (int i = 0; i < items.length; i++) {
@@ -202,10 +215,14 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     
         itemList.forEach((item) ->{
             if(code.equals(item.getDescription())) {
-                new ItemFIle(item, control, userName).setVisible(true);
+                new ItemFile(item, control, userName).setVisible(true);
             }
         });
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_showItemActionPerformed
+
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
+        new ItemFile(control, userName).setVisible(true);
+    }//GEN-LAST:event_createButtonActionPerformed
        
     @Override
     public void start() {
@@ -216,15 +233,16 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JMenuItem createButton;
+    private javax.swing.JMenu exitButton;
     private static javax.swing.JTable itemTable;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JMenuItem showItem;
     // End of variables declaration//GEN-END:variables
 }

@@ -41,7 +41,11 @@ public class LoginInterface extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
+        nameField.setText("Admin");
+
         jLabel3.setText("Log In");
+
+        passField.setText("12345");
 
         logButton.setText("Enter");
         logButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +106,11 @@ public class LoginInterface extends javax.swing.JFrame {
     private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
         String userName = nameField.getText();
         String password = passField.getText();
-        if(control.logUser(userName, password)) new ViewImpl(control,userName).setVisible(true);
+        if(control.logUser(userName, password)) {
+            new ViewImpl(control,userName).setVisible(true);
+            this.setEnabled(false);
+            this.setVisible(false);
+        }
         else errorMessage.setVisible(true);
     }//GEN-LAST:event_logButtonActionPerformed
 

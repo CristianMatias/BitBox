@@ -47,8 +47,13 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public boolean saveItem(Item item) {
+    public boolean updateItem(Item item) {
         return itemQuery.update(item);
+    }
+
+    @Override
+    public boolean saveItem(Item item) {
+        return itemQuery.insert(item);
     }
     
 }

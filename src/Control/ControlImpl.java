@@ -38,7 +38,12 @@ public class ControlImpl implements Control{
     }
 
     @Override
-    public boolean saveItem(Item item) {
+    public boolean updateItem(Item item) {
+        return model.updateItem(item);
+    }
+
+    @Override
+    public boolean createItem(Item item) {
         return model.saveItem(item);
     }
     

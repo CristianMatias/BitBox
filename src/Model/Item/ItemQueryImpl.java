@@ -28,7 +28,7 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public void startTransaction() {
-        transaccion = session.beginTransaction();
+        transaccion = getSession().beginTransaction();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public void handleException(HibernateException ex) {
-        JOptionPane.showConfirmDialog(null, null, "ERROR", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
     }
 
     @Override
@@ -62,7 +62,21 @@ public class ItemQueryImpl implements ItemQuery {
 
     @Override
     public boolean insert(Item object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            startTransaction();
+            object.setCode(getMaxCode()+1);
+            getSession().persist(object);
+            endTransaction();
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    private int getMaxCode(){
+        query = getSession().createQuery("select max(i.code) from Item i");
+        return (int) query.setMaxResults(1).uniqueResult();
     }
 
     @Override
@@ -73,7 +87,6 @@ public class ItemQueryImpl implements ItemQuery {
             endTransaction();
             return true;
         }catch(Exception ex){
-            ex.printStackTrace();
             return false;
         }
     }

@@ -14,5 +14,6 @@ public interface Control {
     public List readItems();
     public Supplier getSupplier(String name);
     public Userlogin getUserlogin(String name);
-    public boolean saveItem(Item item);
+    public boolean updateItem(Item item);
+    public boolean createItem(Item item);
 }
