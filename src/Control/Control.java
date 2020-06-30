@@ -1,6 +1,7 @@
 package Control;
 
 import Model.Item.Item;
+import Model.PriceReduction.Pricereduction;
 import Model.Supplier.Supplier;
 import Model.User.Userlogin;
 import java.util.List;
@@ -16,4 +17,6 @@ public interface Control {
     public Userlogin getUserlogin(String name);
     public boolean updateItem(Item item);
     public boolean createItem(Item item);
+    public boolean createDiscount(Pricereduction pricereduction);
+    public boolean deleteItem(Item item);
 }

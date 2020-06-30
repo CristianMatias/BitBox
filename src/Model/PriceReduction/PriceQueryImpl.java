@@ -1,19 +1,15 @@
-package Model.Item;
+package Model.PriceReduction;
 
 import Model.Conexion;
 import java.io.Serializable;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- * 
- * @author Cristian
- */
-public class ItemQueryImpl implements ItemQuery {
+
+public class PriceQueryImpl implements PriceQuery {
     private Transaction transaccion;
     private Query query;
     private Session session = null;
@@ -48,51 +44,45 @@ public class ItemQueryImpl implements ItemQuery {
     public void handleException(HibernateException ex) {
         ex.printStackTrace();
     }
-
+    
     @Override
-    public List<Item> readAll() {
-        query = getSession().createQuery(HQL_READ_ALL);
-        return query.list();
+    public int getMaxIndex() {
+        query = getSession().createQuery(HQL_MAX_INDEX);
+        return (int) query.setMaxResults(1).uniqueResult();
     }
 
     @Override
-    public Item readOne(Serializable id, Class<Item> entityClass) {
+    public List<Pricereduction> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean insert(Item object) {
+    public Pricereduction readOne(Serializable id, Class<Pricereduction> entityClass) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean insert(Pricereduction object) {
         try{
             startTransaction();
-            object.setCode(getMaxCode()+1);
-            getSession().persist(object);
+            object.setIdReduction(getMaxIndex()+1);
+            session.persist(object);
             endTransaction();
             return true;
         }catch(Exception ex){
             ex.printStackTrace();
             return false;
         }
-    }
-    
-    private int getMaxCode(){
-        query = getSession().createQuery("select max(i.code) from Item i");
-        return (int) query.setMaxResults(1).uniqueResult();
+        
     }
 
     @Override
-    public boolean update(Item object) {
-        try{
-            startTransaction();
-            getSession().update(object);
-            endTransaction();
-            return true;
-        }catch(Exception ex){
-            return false;
-        }
+    public boolean update(Pricereduction object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean create(Item object) {
+    public boolean create(Pricereduction object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -102,15 +92,8 @@ public class ItemQueryImpl implements ItemQuery {
     }
 
     @Override
-    public boolean delete(Item object) {
-        try{
-            startTransaction();
-            session.delete(object);
-            endTransaction();
-            return true;
-        }catch(Exception ex){
-            return false;
-        }
+    public boolean delete(Pricereduction object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -2,6 +2,7 @@ package Control;
 
 import Model.Item.Item;
 import Model.Model;
+import Model.PriceReduction.Pricereduction;
 import Model.Supplier.Supplier;
 import Model.User.Userlogin;
 import java.util.List;
@@ -45,6 +46,16 @@ public class ControlImpl implements Control{
     @Override
     public boolean createItem(Item item) {
         return model.saveItem(item);
+    }
+
+    @Override
+    public boolean createDiscount(Pricereduction pricereduction) {
+        return model.createDiscount(pricereduction);
+    }
+
+    @Override
+    public boolean deleteItem(Item item) {
+        return model.removeItem(item);
     }
     
     

@@ -3,6 +3,9 @@ package Model;
 import Model.Item.Item;
 import Model.Item.ItemQuery;
 import Model.Item.ItemQueryImpl;
+import Model.PriceReduction.PriceQuery;
+import Model.PriceReduction.PriceQueryImpl;
+import Model.PriceReduction.Pricereduction;
 import Model.Supplier.Supplier;
 import Model.Supplier.SupplierQuery;
 import Model.Supplier.SupplierQueryImpl;
@@ -19,11 +22,13 @@ public class ModelImpl implements Model {
     private final ItemQuery itemQuery;
     private final UserQuery userQuery;
     private final SupplierQuery supplierQuery;
+    private final PriceQuery priceQuery;
 
     public ModelImpl() {
         this.itemQuery = new ItemQueryImpl();
         this.userQuery = new UserQueryImpl();
         this.supplierQuery = new SupplierQueryImpl();
+        this.priceQuery = new PriceQueryImpl();
     }
 
     @Override
@@ -54,6 +59,16 @@ public class ModelImpl implements Model {
     @Override
     public boolean saveItem(Item item) {
         return itemQuery.insert(item);
+    }
+
+    @Override
+    public boolean createDiscount(Pricereduction pricereduction) {
+        return priceQuery.insert(pricereduction);
+    }
+
+    @Override
+    public boolean removeItem(Item item) {
+        return itemQuery.delete(item);
     }
     
 }

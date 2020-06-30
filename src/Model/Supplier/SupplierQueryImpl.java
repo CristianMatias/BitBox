@@ -81,5 +81,10 @@ private Transaction transaccion;
         query.setString("name", name);
         return (Supplier) query.setMaxResults(1).uniqueResult();
     }
+
+    @Override
+    public boolean delete(Supplier object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

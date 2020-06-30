@@ -97,8 +97,9 @@ public class UserQueryImpl implements UserQuery{
         return (Userlogin) query.setMaxResults(1).uniqueResult();
     }
 
-   
-    
-   
+    @Override
+    public boolean delete(Userlogin object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

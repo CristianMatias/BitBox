@@ -20,5 +20,6 @@ public interface GenericQuery<E>{
    public boolean insert(E object);
    public boolean update(E object);
    public boolean create(E object);
+   public boolean delete(E object);
    public void closeSession();
 }

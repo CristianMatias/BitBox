@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Item.Item;
+import Model.PriceReduction.Pricereduction;
 import Model.Supplier.Supplier;
 import Model.User.Userlogin;
 import java.util.List;
@@ -17,4 +18,7 @@ public interface Model {
 
     public boolean updateItem(Item item);
     public boolean saveItem(Item item);
+
+    public boolean createDiscount(Pricereduction pricereduction);
+    public boolean removeItem(Item item);
 }
