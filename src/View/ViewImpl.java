@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Model.PriceReduction.Pricereduction;
+import Model.User.Userlogin;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 /**
  *
@@ -15,6 +17,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     private static Control control;
     private String userName = null;
     private static List<Item> itemList;
+    private static List<Userlogin> userList;
     
     /**
      * Creates new form ViewImpl
@@ -33,6 +36,18 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         this.userName = userName;
         loginButton.setText(userName);
         prepareTable();
+        if(control.getUserlogin(userName).getType().equals("Admin")) prepareList();
+    }
+    
+    protected static void prepareList(){
+        tabbedPane.setEnabledAt(1, true);
+        userList = control.readUsers();
+        DefaultListModel listModel = new DefaultListModel();
+        userList.forEach((user) -> {
+            listModel.addElement(user.getUsername()+" - "+user.getType());
+        });
+        
+        usersList.setModel(listModel);
     }
     
     protected static void prepareTable(){
@@ -84,9 +99,22 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         loginButton = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabbedPane = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        usersList = new javax.swing.JList<>();
+        addButton = new javax.swing.JButton();
+        deleteUserButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        updateButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        passField = new javax.swing.JPasswordField();
+        roleCombo = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         exitButton = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -109,7 +137,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
             },
             new String [] {
-                "Código", "Descripción", "Precio", "Fecha", "Estado", "Creado"
+                "Code", "Description", "Price (€)", "Date", "State", "Made by"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -128,7 +156,121 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             itemTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jTabbedPane1.addTab("Tabla de Precios", jScrollPane1);
+        tabbedPane.addTab("Items", jScrollPane1);
+
+        usersList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usersListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(usersList);
+
+        addButton.setText("Add new");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        deleteUserButton.setText("Delete");
+        deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Name - Role");
+
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Name");
+
+        jLabel3.setText("Password");
+
+        jLabel4.setText("Role");
+
+        nameField.setEditable(false);
+
+        passField.setEditable(false);
+
+        roleCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Normal" }));
+        roleCombo.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(92, 92, 92)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addComponent(roleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addButton)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addComponent(deleteUserButton)
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(roleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateButton)))
+                .addGap(58, 58, 58))
+        );
+
+        tabbedPane.addTab("Users", jPanel1);
+        tabbedPane.setEnabledAt(1, false);
 
         exitButton.setText("Archivo");
 
@@ -177,7 +319,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,7 +328,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
                 .addContainerGap()
                 .addComponent(loginButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -223,7 +365,68 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         new ItemFile(control, userName).setVisible(true);
     }//GEN-LAST:event_createButtonActionPerformed
-       
+
+    private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
+        if(askConfirmation("Are you sure you want to delete the user?") == JOptionPane.OK_OPTION){
+            if(getSelectedUser().getUsername().equals(userName))
+                JOptionPane.showMessageDialog(null, "You can't delete yourself");
+            else deleteUser();
+        }
+    }//GEN-LAST:event_deleteUserButtonActionPerformed
+
+    private void deleteUser(){
+        if(control.deleteUser(getSelectedUser())){
+            JOptionPane.showMessageDialog(null, "User deleted");
+            prepareList();
+        }
+        else JOptionPane.showMessageDialog(null, "Couldn't delete the user");
+    }
+    
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        new UserFile(control).setVisible(true);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        Userlogin userlogin = new Userlogin();
+        userlogin.setUsername(nameField.getText());
+        userlogin.setType(roleCombo.getSelectedItem()+"");
+        userlogin.setPass(passField.getText());
+        if(control.updateUser(userlogin))
+            JOptionPane.showMessageDialog(null, "User updated");
+        else JOptionPane.showMessageDialog(null, "Couldn't update the user");
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void usersListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersListMouseClicked
+        Userlogin selectedUser = getSelectedUser();
+        nameField.setText(selectedUser.getUsername());
+        roleCombo.setSelectedItem(selectedUser.getType());
+        passField.setText(selectedUser.getPass());
+        if(control.getUserlogin(userName).getType().equals("Admin")) 
+            roleCombo.setEnabled(true);
+        if(selectedUser.getUsername().equals(userName))
+            passField.setEditable(true);
+        
+        else passField.setEditable(false);
+        
+    }//GEN-LAST:event_usersListMouseClicked
+      
+     private int askConfirmation(String message){
+        return JOptionPane.showConfirmDialog(null, message, "Warning!", JOptionPane.YES_NO_OPTION);
+    }
+    
+    private Userlogin userlogin;
+    private Userlogin getSelectedUser(){
+        String nameInfo = usersList.getSelectedValue();
+        String[] name = nameInfo.split(" - ");
+        
+        userList.forEach((user) -> {
+            if(user.getUsername().equals(name[0])) {
+                userlogin = user;
+            }
+        });
+        return userlogin;
+    }
+    
     @Override
     public void start() {
         this.setVisible(true);
@@ -232,17 +435,30 @@ public class ViewImpl extends javax.swing.JFrame implements View{
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenuItem createButton;
+    private javax.swing.JButton deleteUserButton;
     private javax.swing.JMenu exitButton;
     private static javax.swing.JTable itemTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loginButton;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JPasswordField passField;
+    private javax.swing.JComboBox<String> roleCombo;
     private javax.swing.JMenuItem showItem;
+    private static javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JButton updateButton;
+    private static javax.swing.JList<String> usersList;
     // End of variables declaration//GEN-END:variables
 }

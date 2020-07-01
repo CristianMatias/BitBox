@@ -4,13 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Main/Main.java</file>
-            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/View/View.java</file>
-            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/hibernate.reveng.xml</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/User/UserQueryImpl.java</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/User/UserQuery.java</file>
             <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/Item/ItemQuery.java</file>
-            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/Item/Item.hbm.xml</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/User/Userlogin.java</file>
             <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/Item/Item.java</file>
             <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/Item/ItemQueryImpl.java</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/Model/Model.java</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/View/ViewImpl.java</file>
+            <file>file:/C:/Users/Cristian/Documents/NetBeansProjects/BitboxAssigment/src/View/LoginInterface.java</file>
         </group>
     </open-files>
 </project-private>

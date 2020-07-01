@@ -3,10 +3,12 @@ package View;
 import Control.Control;
 import Model.Item.Item;
 import Model.PriceReduction.Pricereduction;
+import Model.Supplier.Supplier;
 import java.awt.HeadlessException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -23,9 +25,9 @@ public class ItemFile extends javax.swing.JFrame {
     private static Pricereduction pricereduction = null;
     
     public ItemFile(Item item, Control control, String userName) {
+        this.control = control;
         initComponents();
         this.item = item;
-        this.control = control;
         this.userName = userName;
         fillItemInformation();
         closeInformationUnchangable();
@@ -42,6 +44,7 @@ public class ItemFile extends javax.swing.JFrame {
         originalPrice.setVisible(false);
         offertInfo.setVisible(false);
         creatorInfo.setVisible(false);
+        removeButton.setVisible(false);
     }
     
     private void closeInformationUnchangable(){
@@ -52,6 +55,9 @@ public class ItemFile extends javax.swing.JFrame {
             discardButton.setVisible(false);
             discountButton.setVisible(false);
         }
+        else
+            if(!control.getUserlogin(userName).getType().equals("Admin")) 
+                removeButton.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -68,7 +74,6 @@ public class ItemFile extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        supplierField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         dateField = new javax.swing.JTextField();
@@ -84,6 +89,7 @@ public class ItemFile extends javax.swing.JFrame {
         codeField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         discountButton = new javax.swing.JButton();
+        supplierCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(700, 0));
@@ -147,6 +153,8 @@ public class ItemFile extends javax.swing.JFrame {
             }
         });
 
+        supplierCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No supplier" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,11 +204,12 @@ public class ItemFile extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                            .addComponent(supplierField)
-                            .addComponent(dateField)
-                            .addComponent(codeField))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                .addComponent(dateField)
+                                .addComponent(codeField))
+                            .addComponent(supplierCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -222,8 +231,8 @@ public class ItemFile extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(supplierField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(supplierCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(activeCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -252,6 +261,11 @@ public class ItemFile extends javax.swing.JFrame {
                             .addComponent(creatorInfo))
                         .addContainerGap())))
         );
+
+        List<Supplier> suppliers = control.readSuppliers();
+        suppliers.forEach((supplier) -> {
+            supplierCombo.addItem(supplier.getName());
+        });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -331,7 +345,7 @@ public class ItemFile extends javax.swing.JFrame {
         newItem.setPrice(Double.parseDouble(offertField.getText()));
         if(activeCheck.isSelected()) newItem.setStateitem("Active");
         else newItem.setStateitem("Discontinued");
-        newItem.setSupplier(control.getSupplier(supplierField.getText()));
+        newItem.setSupplier(control.getSupplier(supplierCombo.getSelectedItem()+""));
         newItem.setUserlogin(control.getUserlogin(userName));
         newItem.setPricereduction(pricereduction);
         return newItem;
@@ -341,8 +355,8 @@ public class ItemFile extends javax.swing.JFrame {
          codeField.setText(item.getCode()+"");
         nameField.setText(item.getDescription());
         dateField.setText(item.getCreationdate()+"");
-        if(item.getSupplier() != null) supplierField.setText(item.getSupplier().getName());
-        else supplierField.setText("No supplier found!");
+        if(item.getSupplier() != null)  supplierCombo.setSelectedItem(item.getSupplier().getName());
+        else supplierCombo.setSelectedIndex(0);
         if(getStateItem(item.getStateitem())) activeCheck.setSelected(true);
         else deactiveCheck.setSelected(false);
         creatorInfo.setText("Product added by "+item.getUserlogin().getUsername());
@@ -396,7 +410,7 @@ public class ItemFile extends javax.swing.JFrame {
     private javax.swing.JLabel originalPrice;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
-    private javax.swing.JTextField supplierField;
+    private javax.swing.JComboBox<String> supplierCombo;
     // End of variables declaration//GEN-END:variables
 
 }

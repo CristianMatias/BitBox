@@ -19,4 +19,9 @@ public interface Control {
     public boolean createItem(Item item);
     public boolean createDiscount(Pricereduction pricereduction);
     public boolean deleteItem(Item item);
+    public List readUsers();
+    public boolean deleteUser(Userlogin userlogin);
+    public boolean saveUser(Userlogin userlogin);
+    public List readSuppliers();
+    public boolean updateUser(Userlogin userlogin);
 }

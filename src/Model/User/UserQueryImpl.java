@@ -40,12 +40,13 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public void startTransaction() {
-        transaccion = getSession().getTransaction();
+        transaccion = getSession().beginTransaction();
     }
 
     @Override
     public void endTransaction() {
         try{
+            if(!transaccion.wasCommitted())
             transaccion.commit();
         }catch(HibernateException ex){
             handleException(ex);
@@ -62,7 +63,8 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public List<Userlogin> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        query = getSession().createQuery("from Userlogin");
+        return query.list();
     }
 
     @Override
@@ -72,12 +74,26 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public boolean insert(Userlogin object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            startTransaction();
+            getSession().persist(object);
+            endTransaction();
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
     }
 
     @Override
     public boolean update(Userlogin object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            startTransaction();
+            getSession().update(object);
+            endTransaction();
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
     }
 
     @Override
@@ -87,7 +103,7 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public void closeSession() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getSession().close();
     }
 
     @Override
@@ -99,7 +115,14 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public boolean delete(Userlogin object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            startTransaction();
+            getSession().delete(object);
+            endTransaction();
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
     }
     
 }

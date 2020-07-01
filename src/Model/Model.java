@@ -21,4 +21,9 @@ public interface Model {
 
     public boolean createDiscount(Pricereduction pricereduction);
     public boolean removeItem(Item item);
+    public List<Userlogin> readUsers();
+    public boolean removeUsers(Userlogin userlogin);
+    public boolean saveUser(Userlogin user);
+    public List<Supplier> getAllSuppliers();
+    public boolean updateUser(Userlogin userlogin);
 }

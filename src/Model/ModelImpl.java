@@ -70,5 +70,30 @@ public class ModelImpl implements Model {
     public boolean removeItem(Item item) {
         return itemQuery.delete(item);
     }
+
+    @Override
+    public List<Userlogin> readUsers() {
+        return userQuery.readAll();
+    }
+
+    @Override
+    public boolean removeUsers(Userlogin userlogin) {
+        return userQuery.delete(userlogin);
+    }
+
+    @Override
+    public boolean saveUser(Userlogin user) {
+        return userQuery.insert(user);
+    }
+
+    @Override
+    public List<Supplier> getAllSuppliers() {
+        return supplierQuery.readAll();
+    }
+
+    @Override
+    public boolean updateUser(Userlogin userlogin) {
+        return userQuery.update(userlogin);
+    }
     
 }

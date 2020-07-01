@@ -47,7 +47,8 @@ private Transaction transaccion;
 
     @Override
     public List<Supplier> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        query = getSession().createQuery("from Supplier");
+        return query.list();
     }
 
     @Override
@@ -72,7 +73,7 @@ private Transaction transaccion;
 
     @Override
     public void closeSession() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session.close();
     }
 
     @Override

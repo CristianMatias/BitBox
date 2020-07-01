@@ -69,7 +69,6 @@ public class ItemQueryImpl implements ItemQuery {
             endTransaction();
             return true;
         }catch(Exception ex){
-            ex.printStackTrace();
             return false;
         }
     }

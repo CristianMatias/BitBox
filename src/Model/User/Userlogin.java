@@ -60,6 +60,11 @@ public class Userlogin  implements java.io.Serializable {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        return "Userlogin{" + "username=" + username + ", pass=" + pass + ", type=" + type + ", items=" + items + '}';
+    }
+
 
 
 

@@ -57,6 +57,31 @@ public class ControlImpl implements Control{
     public boolean deleteItem(Item item) {
         return model.removeItem(item);
     }
+
+    @Override
+    public List readUsers() {
+        return model.readUsers();
+    }
+
+    @Override
+    public boolean deleteUser(Userlogin userlogin) {
+        return model.removeUsers(userlogin);
+    }
+
+    @Override
+    public boolean saveUser(Userlogin userlogin) {
+        return model.saveUser(userlogin);
+    }
+
+    @Override
+    public List readSuppliers() {
+        return model.getAllSuppliers();
+    }
+
+    @Override
+    public boolean updateUser(Userlogin userlogin) {
+        return model.updateUser(userlogin);
+    }
     
     
 }
