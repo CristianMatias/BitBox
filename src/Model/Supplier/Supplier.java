@@ -59,6 +59,11 @@ public class Supplier  implements java.io.Serializable {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        return "Supplier{" + "id=" + id + ", name=" + name + ", country=" + country + ", items=" + items + '}';
+    }
+
 
 
 

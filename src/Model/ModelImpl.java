@@ -95,5 +95,15 @@ public class ModelImpl implements Model {
     public boolean updateUser(Userlogin userlogin) {
         return userQuery.update(userlogin);
     }
+
+    @Override
+    public List<Object[]> getCheapestItems() {
+        return supplierQuery.getCheapestItems();
+    }
+
+    @Override
+    public List<Supplier> getSupplierWithOfferts() {
+        return supplierQuery.getSupplierWithOfferts();
+    }
     
 }

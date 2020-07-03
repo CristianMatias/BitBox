@@ -82,6 +82,16 @@ public class ControlImpl implements Control{
     public boolean updateUser(Userlogin userlogin) {
         return model.updateUser(userlogin);
     }
+
+    @Override
+    public List getCheapestItems() {
+        return model.getCheapestItems();
+    }
+
+    @Override
+    public List getSupplierWithOfferts() {
+        return model.getSupplierWithOfferts();
+    }
     
     
 }

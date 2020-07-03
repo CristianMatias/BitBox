@@ -24,4 +24,6 @@ public interface Control {
     public boolean saveUser(Userlogin userlogin);
     public List readSuppliers();
     public boolean updateUser(Userlogin userlogin);
+    public List<Object[]> getCheapestItems();
+    public List getSupplierWithOfferts();
 }

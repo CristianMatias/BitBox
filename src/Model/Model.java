@@ -26,4 +26,6 @@ public interface Model {
     public boolean saveUser(Userlogin user);
     public List<Supplier> getAllSuppliers();
     public boolean updateUser(Userlogin userlogin);
+    public List<Object[]> getCheapestItems();
+    public List<Supplier> getSupplierWithOfferts();
 }

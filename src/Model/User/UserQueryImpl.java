@@ -20,14 +20,11 @@ public class UserQueryImpl implements UserQuery{
 
     @Override
     public boolean checkUser(String name, String pass) {
-        try{
-            query = getSession().createQuery(HQL_CHECK_USER);
-            query.setString("name", name);
-            query.setString("pass", pass);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+        query = getSession().createQuery(HQL_CHECK_USER);
+        query.setString("name", name);
+        Userlogin userlogin = (Userlogin) query.setMaxResults(1).uniqueResult();
+        return userlogin.getPass().equals(pass);
+ 
     }
 
     @Override

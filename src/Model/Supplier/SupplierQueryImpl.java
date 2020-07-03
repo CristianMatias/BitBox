@@ -87,5 +87,17 @@ private Transaction transaccion;
     public boolean delete(Supplier object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Object[]> getCheapestItems() {
+        query = getSession().createSQLQuery(HQL_CHEAPEST_ITEMS);
+        return query.list();
+    }
+
+    @Override
+    public List<Supplier> getSupplierWithOfferts() {
+        query = getSession().createSQLQuery(HQL_SUPPLIERS_WITH_OFFERTS);
+        return query.list();
+    }
     
 }
