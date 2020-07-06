@@ -40,6 +40,9 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         if(control.getUserlogin(userName).getType().equals("Admin")) prepareList();
     }
     
+    /**
+     * 
+     */
     protected static void prepareList(){
         tabbedPane.setEnabledAt(2, true);
         userList = control.readUsers();
@@ -51,6 +54,9 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         usersList.setModel(listModel);
     }
     
+    /**
+     * 
+     */
     protected static void prepareTable(){
         itemList = control.readItems();
         prepareTableItems((DefaultTableModel) itemTable.getModel());
@@ -79,6 +85,12 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         itemTable.setModel(model);
     }
     
+    /**
+     * 
+     * @param price
+     * @param priceReduction
+     * @return 
+     */
     protected static double preparePrices(double price, Pricereduction priceReduction){
         Date date = new Date(); 
         if(priceReduction != null){

@@ -314,6 +314,10 @@ public class ItemFile extends javax.swing.JFrame {
         else JOptionPane.showMessageDialog(null, "Failed to remove the Item");
     }
     
+    /**
+     * 
+     * @param pricereduction 
+     */
     public static void setDiscount(Pricereduction pricereduction){
         ItemFile.pricereduction = pricereduction;
     }

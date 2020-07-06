@@ -30,6 +30,10 @@ public class Conexion {
         }
     }
     
+    /**
+     * Gets the object SessionFactory to connect with the Database
+     * @return - The object SessionFactory
+     */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
