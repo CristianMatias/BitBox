@@ -517,19 +517,19 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void supplierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierButtonActionPerformed
-        resultsPane.setText("List of suppliers associated to items whose price has been reduced\n\n");
-        List<Object[]> results = control.getSupplierWithOfferts();
-        results.forEach((result) -> {
-            resultsPane.append("* Supplier: "+result[0]+" from "+result[1]+"\n");
-        });
-    }//GEN-LAST:event_supplierButtonActionPerformed
-
-    private void offertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offertsButtonActionPerformed
         resultsPane.setText("List of cheapest item per supplier\n\n");
         List<Object[]> results = control.getCheapestItems();
         
         results.forEach((result) -> {
             resultsPane.append("* Name: "+result[0]+" -> Item: "+result[1]+" "+result[2]+"€\n");
+        });
+    }//GEN-LAST:event_supplierButtonActionPerformed
+
+    private void offertsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offertsButtonActionPerformed
+        resultsPane.setText("List of suppliers associated to items whose price has been reduced\n\n");
+        List<Object[]> results = control.getSupplierWithOfferts();
+        results.forEach((result) -> {
+            resultsPane.append("* Supplier: "+result[0]+" from "+result[1]+"\n");
         });
     }//GEN-LAST:event_offertsButtonActionPerformed
      
