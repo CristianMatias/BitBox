@@ -92,8 +92,10 @@ public class ItemFile extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setLocation(new java.awt.Point(700, 0));
 
+        discardButton.setBackground(new java.awt.Color(251, 217, 20));
         discardButton.setText("Discard changes");
         discardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +103,7 @@ public class ItemFile extends javax.swing.JFrame {
             }
         });
 
+        removeButton.setBackground(new java.awt.Color(251, 217, 20));
         removeButton.setText("Remove Item");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +131,7 @@ public class ItemFile extends javax.swing.JFrame {
 
         creatorInfo.setText("Product added by");
 
+        saveButton.setBackground(new java.awt.Color(251, 217, 20));
         saveButton.setText("Save changes");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +147,7 @@ public class ItemFile extends javax.swing.JFrame {
 
         jLabel4.setText("€");
 
+        discountButton.setBackground(new java.awt.Color(251, 217, 20));
         discountButton.setText("Add Discount");
         discountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

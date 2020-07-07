@@ -36,6 +36,7 @@ public class Login extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Nombre:");
 
@@ -47,6 +48,7 @@ public class Login extends javax.swing.JFrame {
 
         passField.setText("12345");
 
+        logButton.setBackground(new java.awt.Color(251, 217, 20));
         logButton.setText("Enter");
         logButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

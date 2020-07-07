@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
     <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
       <Point value="[700, 0]"/>
     </Property>
@@ -152,6 +155,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="discardButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="d9" red="fb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Discard changes"/>
       </Properties>
       <Events>
@@ -160,6 +166,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="removeButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="d9" red="fb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Remove Item"/>
       </Properties>
       <Events>
@@ -223,6 +232,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="d9" red="fb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Save changes"/>
       </Properties>
       <Events>
@@ -251,6 +263,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="discountButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="d9" red="fb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Add Discount"/>
       </Properties>
       <Events>

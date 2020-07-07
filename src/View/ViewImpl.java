@@ -7,9 +7,12 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Model.PriceReduction.Pricereduction;
 import Model.User.Userlogin;
+import java.awt.Color;
 import java.util.Random;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 /**
  *
  * @author Cristian
@@ -41,7 +44,8 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     }
     
     /**
-     * 
+     * Prepares all the necessary things to 
+     * complete the list
      */
     protected static void prepareList(){
         tabbedPane.setEnabledAt(2, true);
@@ -55,11 +59,20 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     }
     
     /**
-     * 
+     * Prepares all the necessary things to 
+     * complete the table
      */
     protected static void prepareTable(){
         itemList = control.readItems();
         prepareTableItems((DefaultTableModel) itemTable.getModel());
+        
+        DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
+        Alinear.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        for(int i=0;i<6;i++)
+            itemTable.getColumnModel().getColumn(i).setCellRenderer(Alinear);
+        
+        itemTable.getTableHeader().setBackground(Color.yellow);
         
     }
     
@@ -86,10 +99,10 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     }
     
     /**
-     * 
-     * @param price
-     * @param priceReduction
-     * @return 
+     * Prepares the price, reduces it if a offert is available
+     * @param price - the original price
+     * @param priceReduction - The object with the data of offerts
+     * @return - the final price
      */
     protected static double preparePrices(double price, Pricereduction priceReduction){
         Date date = new Date(); 
@@ -144,7 +157,10 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(4, 92, 168));
+        setFocusable(false);
 
+        loginButton.setBackground(new java.awt.Color(251, 217, 20));
         loginButton.setText("Log In");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +168,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             }
         });
 
+        itemTable.setBackground(new java.awt.Color(255, 255, 255));
         itemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -178,6 +195,9 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
         tabbedPane.addTab("Items", jScrollPane1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        supplierButton.setBackground(new java.awt.Color(251, 217, 20));
         supplierButton.setText("Cheapest Items per Supplier");
         supplierButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +205,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             }
         });
 
+        offertsButton.setBackground(new java.awt.Color(251, 217, 20));
         offertsButton.setText("Suppliers with offerts");
         offertsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +247,8 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
         tabbedPane.addTab("Querys", jPanel2);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         usersList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 usersListMouseClicked(evt);
@@ -233,6 +256,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         });
         jScrollPane2.setViewportView(usersList);
 
+        deleteUserButton.setBackground(new java.awt.Color(251, 217, 20));
         deleteUserButton.setText("Delete");
         deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +266,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
 
         jLabel1.setText("Name - Role");
 
+        updateButton.setBackground(new java.awt.Color(251, 217, 20));
         updateButton.setText("Update");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +287,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
         roleCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Normal" }));
         roleCombo.setEnabled(false);
 
+        generateButton.setBackground(new java.awt.Color(251, 217, 20));
         generateButton.setText("Generate Password");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +295,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             }
         });
 
+        saveButton.setBackground(new java.awt.Color(251, 217, 20));
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +303,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
             }
         });
 
+        newButton.setBackground(new java.awt.Color(251, 217, 20));
         newButton.setText("New");
         newButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

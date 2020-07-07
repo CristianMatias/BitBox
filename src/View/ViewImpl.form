@@ -54,6 +54,10 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="a8" green="5c" red="4" type="rgb"/>
+    </Property>
+    <Property name="focusable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -103,6 +107,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="loginButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="d9" red="fb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Log In"/>
       </Properties>
       <Events>
@@ -132,6 +139,9 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="itemTable">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="6" rowCount="0">
                     <Column editable="false" title="Code" type="java.lang.Object"/>
@@ -188,6 +198,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Querys">
@@ -231,6 +246,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="supplierButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cheapest Items per Supplier"/>
               </Properties>
               <Events>
@@ -239,6 +257,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="offertsButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Suppliers with offerts"/>
               </Properties>
               <Events>
@@ -264,6 +285,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tabbedPane.setEnabledAt(2, false);"/>
           </AuxValues>
@@ -395,6 +421,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="deleteUserButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
@@ -408,6 +437,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="updateButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Update"/>
               </Properties>
               <Events>
@@ -455,6 +487,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="generateButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Generate Password"/>
               </Properties>
               <Events>
@@ -463,6 +498,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="saveButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
               <Events>
@@ -471,6 +509,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="newButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="14" green="d9" red="fb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="New"/>
               </Properties>
               <Events>

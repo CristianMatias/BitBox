@@ -57,6 +57,7 @@ public class DiscountPane extends javax.swing.JFrame {
 
         discountFIeld.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####.00"))));
 
+        saveButton.setBackground(new java.awt.Color(251, 217, 20));
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
