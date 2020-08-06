@@ -84,7 +84,7 @@ public class ViewImpl extends javax.swing.JFrame implements View{
     
     private static void prepareTableItems(DefaultTableModel model){
         deleteRows(model.getRowCount(), model);
-        itemList.forEach((item) -> {
+        itemList.forEach((Item item) -> {
             Object[] row = new Object[6];
             
             row[0] = item.getCode();
